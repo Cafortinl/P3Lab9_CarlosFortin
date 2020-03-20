@@ -7,7 +7,8 @@ Pieza::Pieza(){
 
 }
 
-Pieza::Pieza(string c){
+Pieza::Pieza(string c, int t){
+    tipo = t;
     int x = tolower(c[0]);
     int y = c[1];
     

@@ -1,17 +1,17 @@
 #include "Pieza.hpp"
-#include "Rey.hpp"
+#include "Reina.hpp"
 #include <string>
 #include <cmath>
 
 using namespace std;
 
-Rey::Rey() : Pieza(){
+Reina::Reina() : Pieza(){
 }
 
-Rey::Rey(string c, int t) : Pieza(c,t){
+Reina::Reina(string c, int t) : Pieza(c, t){
 }
 
-bool Rey::validarMovimiento(string c, char tablero[8][8]){
+bool Reina::validarMovimiento(string c, char tablero[8][8]){
     bool valido = false;
     string nmov = mov(c);
     int nx = nmov[0];
@@ -30,7 +30,7 @@ bool Rey::validarMovimiento(string c, char tablero[8][8]){
     return valido;
 }
 
-string Rey::mov(string c){
+string Reina::mov(string c){
     int cx = tolower(c[4]);
     int cy = c[5];
     int x,y;
