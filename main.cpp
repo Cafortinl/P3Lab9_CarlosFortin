@@ -5,6 +5,11 @@
 #include "Pieza.hpp"
 #include "Rey.hpp"
 #include "Reina.hpp"
+#include "Alfil.hpp"
+#include "Caballo.hpp"
+#include "Torre.hpp"
+#include "Peon.hpp"
+#include "Partida.hpp"
 
 using namespace std;
 
@@ -12,6 +17,7 @@ void printMatrix();
 
 char tablero[8][8];
 vector<Pieza*> piezas;
+vector<Partida> partidas;
 
 string moverPieza(string c){
     int cy = c[4];
@@ -224,15 +230,25 @@ void mover(){
 }
 
 void leer(){
-
+    ifstream fr("bitacoraPartidas.txt", ios::in);
+    if(!fr){
+        cerr << "No se pudo abrir el archivo" << endl;
+        exit(EXIT_FAILURE);
+    }
+    string separador, nombre, pieza, movimientos;
+    while(fr >> nombre >> nombre >> pieza >> movimientos){
+        Partida t(nombre, pieza, movimientos);
+        partidas.push_back(t);
+    }
 }
 
 void escribir(string nombre, string pieza, vector<string> movimientos){
     ofstream fw("bitacoraPartidas.txt", ios::app);
     fw << "--------------------\n" << nombre << endl << pieza << endl;
     for(int i=0;i<movimientos.size();i++){
-        fw << movimientos[i];
+        fw << movimientos[i] << ";";
     }
+    fw << endl;
 }
 
 void repeticion(){
@@ -330,7 +346,7 @@ void opciones(int x){
             string nombre;
             int pieza;
             cout << "Ingrese el nombre de la partida: ";
-            getline(cin,nombre);
+            cin >> nombre;
             mostrarPiezas();
             cin >> pieza;
             switch(pieza){
@@ -344,18 +360,38 @@ void opciones(int x){
                 }
 
                 case 2:{
+                    Alfil rb("c1",1);
+                    Alfil rn("f8",2);
+                    piezas.push_back(&rb);
+                    piezas.push_back(&rn);
+                    juego(nombre, "Reina");
                     break;
                 }
 
                 case 3:{
+                    Caballo rb("b1",1);
+                    Caballo rn("g8",2);
+                    piezas.push_back(&rb);
+                    piezas.push_back(&rn);
+                    juego(nombre, "Reina");
                     break;
                 }
 
                 case 4:{
+                    Torre rb("a1",1);
+                    Torre rn("h8",2);
+                    piezas.push_back(&rb);
+                    piezas.push_back(&rn);
+                    juego(nombre, "Reina");
                     break;
                 }
 
                 case 5:{
+                    Peon rb("e2",1);
+                    Peon rn("e7",2);
+                    piezas.push_back(&rb);
+                    piezas.push_back(&rn);
+                    juego(nombre, "Reina");
                     break;
                 }
 
@@ -368,6 +404,21 @@ void opciones(int x){
         }
 
         case 2:{
+            partidas.clear();
+            leer();
+            int opcion;
+            for(int i = 0;i < partidas.size();i++){
+                cout << i << "-" << partidas[i].getNombre() << endl;
+            }
+            cin >> opcion;
+            if(opcion <= partidas.size() -1 && opcion > -1){
+                cout << "Nombre: " << partidas[opcion].getNombre() << endl;
+                cout << "Pieza: " << partidas[opcion].getPieza() << endl;
+                cout << "Movimientos" << endl;
+                partidas[opcion].getMovimientos();
+            }else{
+                cout << "La posicion ingresada no es valida" << endl;
+            }
             break;
         }
 
