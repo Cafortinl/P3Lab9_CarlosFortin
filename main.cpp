@@ -13,13 +13,210 @@ void printMatrix();
 char tablero[8][8];
 vector<Pieza*> piezas;
 
+string moverPieza(string c){
+    int cy = c[4];
+    int cx = stoi(c.substr(5,5));
+    int x,y;
+    string salida;
+
+    switch(cy){
+        case 'a':{
+            y = 0;
+            break;
+        }
+
+        case 'b':{
+            y = 1;
+            break;
+        }
+
+        case 'c':{
+            y = 2; 
+            break;
+        }
+
+        case 'd':{
+            y = 3;
+            break;
+        }
+
+        case 'e':{
+            y = 4;
+            break;
+        }
+
+        case 'f':{
+            y = 5;
+            break;
+        }
+
+        case 'g':{
+            y = 6;
+            break;
+        }
+
+        case 'h':{
+            y = 7;
+            break;
+        }
+    }
+
+    switch(cx){
+        case 1:{
+            x = 7;
+            break;
+        }
+
+        case 2:{
+            x = 6;
+            break;
+        }
+
+        case 3:{
+            x = 5; 
+            break;
+        }
+
+        case 4:{
+            x = 4;
+            break;
+        }
+
+        case 5:{
+            x = 3;
+            break;
+        }
+
+        case 6:{
+            x = 2;
+            break;
+        }
+
+        case 7:{
+            x = 1;
+            break;
+        }
+
+        case 8:{
+            x = 0;
+            break;
+        }
+    }
+
+    string mov = x + " " + y;
+
+    return mov;
+}
+
+int piezaActual(string c){
+    int cy = c[1];
+    int cx = stoi(c.substr(2,2));
+    int x,y;
+    int jug = -1;
+    string salida;
+
+    switch(cy){
+        case 'a':{
+            y = 0;
+            break;
+        }
+
+        case 'b':{
+            y = 1;
+            break;
+        }
+
+        case 'c':{
+            y = 2; 
+            break;
+        }
+
+        case 'd':{
+            y = 3;
+            break;
+        }
+
+        case 'e':{
+            y = 4;
+            break;
+        }
+
+        case 'f':{
+            y = 5;
+            break;
+        }
+
+        case 'g':{
+            y = 6;
+            break;
+        }
+
+        case 'h':{
+            y = 7;
+            break;
+        }
+    }
+
+    switch(cx){
+        case 1:{
+            x = 7;
+            break;
+        }
+
+        case 2:{
+            x = 6;
+            break;
+        }
+
+        case 3:{
+            x = 5; 
+            break;
+        }
+
+        case 4:{
+            x = 4;
+            break;
+        }
+
+        case 5:{
+            x = 3;
+            break;
+        }
+
+        case 6:{
+            x = 2;
+            break;
+        }
+
+        case 7:{
+            x = 1;
+            break;
+        }
+
+        case 8:{
+            x = 0;
+            break;
+        }
+    }
+
+    for(int i = 0;i < piezas.size();i++){
+        if((*piezas[i]).getX() == x && (*piezas[i]).getY() == y){
+            jug = i;
+            break;
+        }
+    }
+
+    //cout << jug << endl;
+
+    return jug;
+}
+
 void mover(){
     for(int i=0;i < 8;i++){
         for(int j = 0;j < 8;j++){
             for(int c = 0;c < piezas.size(); c++){
                 if((*piezas[c]).getX() == i && (*piezas[c]).getY() == j){
                     tablero[i][j] = (*piezas[c]).toChar();
-                    cout << (*piezas[c]).toChar() << endl;
                 }
             }
         }
@@ -31,7 +228,11 @@ void leer(){
 }
 
 void escribir(string nombre, string pieza, vector<string> movimientos){
-
+    ofstream fw("bitacoraPartidas.txt", ios::app);
+    fw << "--------------------\n" << nombre << endl << pieza << endl;
+    for(int i=0;i<movimientos.size();i++){
+        fw << movimientos[i];
+    }
 }
 
 void repeticion(){
@@ -39,8 +240,54 @@ void repeticion(){
 }
 
 void juego(string nombre, string pieza){
+    vector<string> movimientos;
+    string mov;
+    int opcion = 0;
     mover();
     printMatrix();
+    do{
+        cout << "Turno del jugador blanco" << endl;
+        cout << "Ingrese las coordenadas de la forma [posActual,posDestino]: ";
+        cin >> mov;
+        while(piezaActual(mov) == -1){
+            cout << "No hay ningun jugador en la posicion ingresada. Ingrese el par de coordenadas de nuevo: ";
+            cin >> mov;
+        }
+        if((*piezas[piezaActual(mov)]).validarMovimiento(mov, tablero, piezas)){
+            string m = moverPieza(mov);
+            int xAnt = (*piezas[piezaActual(mov)]).getX();
+            int yAnt = (*piezas[piezaActual(mov)]).getY();
+            tablero[xAnt][yAnt] = '*';
+            int x = atoi(m.substr(0,0).c_str());
+            int y = atoi(m.substr(2,2).c_str());
+            cout << "aqui" << endl;
+            mover();
+            printMatrix();
+            movimientos.push_back(mov);
+        }
+        cout << "Turno del jugador negro" << endl;
+        cout << "Ingrese las coordenadas de la forma [posActual,posDestino]: ";
+        cin >> mov;
+        while(piezaActual(mov) == -1){
+            cout << "No hay ningun jugador en la posicion ingresada. Ingrese el par de coordenadas de nuevo: ";
+            cin >> mov;
+        }
+        if((*piezas[piezaActual(mov)]).validarMovimiento(mov, tablero, piezas)){
+            string m = moverPieza(mov);
+            int xAnt = (*piezas[piezaActual(mov)]).getX();
+            int yAnt = (*piezas[piezaActual(mov)]).getY();
+            tablero[xAnt][yAnt] = '*';
+            int x = atoi(m.substr(0,0).c_str());
+            int y = atoi(m.substr(2,2).c_str());
+            mover();
+            printMatrix();
+            movimientos.push_back(mov);
+        }
+        cout << "Desea continuar?\n1. Si\n2. No" << endl;
+        cin >> opcion;
+    }while(opcion != 2);
+    piezas.clear();
+    escribir(nombre,pieza,movimientos);
 }
 
 void fillMatrix(){
@@ -57,7 +304,7 @@ void printMatrix(){
             if(tablero[i][j] == '*'){
                 cout << "[ ]";
             }else{
-                cout << tablero[i][j];
+                cout << "[" << tablero[i][j] << "]";
             }
         }
         cout << endl;
@@ -90,6 +337,8 @@ void opciones(int x){
                 case 1:{
                     Reina rb("d1",1);
                     Reina rn("d8",2);
+                    piezas.push_back(&rb);
+                    piezas.push_back(&rn);
                     juego(nombre, "Reina");
                     break;
                 }

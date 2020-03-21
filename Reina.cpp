@@ -2,6 +2,7 @@
 #include "Reina.hpp"
 #include <string>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ Reina::Reina() : Pieza(){
 Reina::Reina(string c, int t) : Pieza(c, t){
 }
 
-bool Reina::validarMovimiento(string c, char tablero[8][8]){
+bool Reina::validarMovimiento(string c, char tablero[8][8], vector<Pieza*> piezas){
     bool valido = false;
     string nmov = mov(c);
     int nx = nmov[0];
@@ -31,92 +32,92 @@ bool Reina::validarMovimiento(string c, char tablero[8][8]){
 }
 
 string Reina::mov(string c){
-    int cx = tolower(c[4]);
-    int cy = c[5];
+    int cy = c[4];
+    int cx = stoi(c.substr(5,5));
     int x,y;
     
     string salida;
 
-    switch(cx){
-        case 'a':{
-            x = 0;
-            break;
-        }
-
-        case 'b':{
-            x = 1;
-            break;
-        }
-
-        case 'c':{
-            x = 2; 
-            break;
-        }
-
-        case 'd':{
-            x = 3;
-            break;
-        }
-
-        case 'e':{
-            x = 4;
-            break;
-        }
-
-        case 'f':{
-            x = 5;
-            break;
-        }
-
-        case 'g':{
-            x = 6;
-            break;
-        }
-
-        case 'h':{
-            x = 7;
-            break;
-        }
-    }
-
     switch(cy){
-        case 1:{
+        case 'a':{
             y = 0;
             break;
         }
 
-        case 2:{
+        case 'b':{
             y = 1;
             break;
         }
 
-        case 3:{
+        case 'c':{
             y = 2; 
             break;
         }
 
-        case 4:{
+        case 'd':{
             y = 3;
             break;
         }
 
-        case 5:{
+        case 'e':{
             y = 4;
             break;
         }
 
-        case 6:{
+        case 'f':{
             y = 5;
             break;
         }
 
-        case 7:{
+        case 'g':{
             y = 6;
             break;
         }
 
-        case 8:{
+        case 'h':{
             y = 7;
+            break;
+        }
+    }
+
+    switch(cx){
+        case 1:{
+            x = 7;
+            break;
+        }
+
+        case 2:{
+            x = 6;
+            break;
+        }
+
+        case 3:{
+            x = 5; 
+            break;
+        }
+
+        case 4:{
+            x = 4;
+            break;
+        }
+
+        case 5:{
+            x = 3;
+            break;
+        }
+
+        case 6:{
+            x = 2;
+            break;
+        }
+
+        case 7:{
+            x = 1;
+            break;
+        }
+
+        case 8:{
+            x = 0;
             break;
         }
     }
