@@ -20,9 +20,7 @@ bool Reina::validarMovimiento(string c, char tablero[8][8], vector<Pieza*> pieza
     if(nx > 7 || nx < 0 || ny > 7 || ny < 0){
         valido = false;
     }else{
-        if(abs(nx-this->getX()) > 1 || abs(ny-this->getY()) > 1){
-            valido = false;
-        }else{
+        if(((*this).getX() == nx) || ((*this).getY() == ny) || abs((*this).getX()-nx) == abs((*this).getY() - nx)){
             valido = true;
             this->setX(nx);
             this->setY(ny);

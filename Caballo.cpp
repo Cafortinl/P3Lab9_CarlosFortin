@@ -22,7 +22,7 @@ bool Caballo::validarMovimiento(string c, char tablero[8][8], vector<Pieza*> pie
         valido = false;
     }else{
         cout << "awd" << endl;
-        if(abs(nx-(*this).getX()) > 1 || abs(ny-(*this).getY()) > 1){
+        if(((*this).getX()-nx)*((*this).getX()-nx) + ((*this).getY()-ny)*((*this).getY()-ny) == 5){
             valido = false;
         }else{
             valido = true;

@@ -21,10 +21,7 @@ bool Alfil::validarMovimiento(string c, char tablero[8][8], vector<Pieza*> pieza
     if((nx > 7 || nx < 0) || (ny > 7 || ny < 0)){
         valido = false;
     }else{
-        cout << "awd" << endl;
-        if(abs(nx-(*this).getX()) > 1 || abs(ny-(*this).getY()) > 1){
-            valido = false;
-        }else{
+        if(abs((*this).getX() - nx) == abs((*this).getY()-ny)){
             valido = true;
         }
     }

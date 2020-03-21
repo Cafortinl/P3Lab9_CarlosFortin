@@ -10,3 +10,11 @@ Reina
 Partida3
 Reina
 [e1,f1];
+--------------------
+Partida4
+Reina
+[b1,b2];[g8,g7];
+--------------------
+Partida5
+Caballo
+[e1,e2];[e8,d8];[b1,b2];[g8,g7];

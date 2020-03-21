@@ -364,7 +364,7 @@ void opciones(int x){
                     Alfil rn("f8",2);
                     piezas.push_back(&rb);
                     piezas.push_back(&rn);
-                    juego(nombre, "Reina");
+                    juego(nombre, "Alfil");
                     break;
                 }
 
@@ -373,7 +373,7 @@ void opciones(int x){
                     Caballo rn("g8",2);
                     piezas.push_back(&rb);
                     piezas.push_back(&rn);
-                    juego(nombre, "Reina");
+                    juego(nombre, "Caballo");
                     break;
                 }
 
@@ -382,7 +382,7 @@ void opciones(int x){
                     Torre rn("h8",2);
                     piezas.push_back(&rb);
                     piezas.push_back(&rn);
-                    juego(nombre, "Reina");
+                    juego(nombre, "Torre");
                     break;
                 }
 
@@ -391,7 +391,7 @@ void opciones(int x){
                     Peon rn("e7",2);
                     piezas.push_back(&rb);
                     piezas.push_back(&rn);
-                    juego(nombre, "Reina");
+                    juego(nombre, "Peon");
                     break;
                 }
 
