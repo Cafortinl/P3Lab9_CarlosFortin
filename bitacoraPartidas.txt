@@ -18,4 +18,11 @@ Reina
 Partida5
 Caballo
 [e1,e2];[e8,d8];[b1,b2];[g8,g7];
-
+--------------------
+Partida6
+Peon
+[e7,d7];
+--------------------
+Partida7
+Peon
+[e2,e3];[e7,e6];[e8,d7];[e1,f2];[e8,d8];

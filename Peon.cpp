@@ -21,8 +21,7 @@ bool Peon::validarMovimiento(string c, char tablero[8][8], vector<Pieza*> piezas
     if((nx > 7 || nx < 0) || (ny > 7 || ny < 0)){
         valido = false;
     }else{
-        cout << "awd" << endl;
-        if(abs((*this).getY()-ny) == 1 && abs((*this).getX()-nx) == 0){
+        if(abs((*this).getY()-ny) == 0 && abs((*this).getX()-nx) == 1){
             valido = true;
         }
     }
